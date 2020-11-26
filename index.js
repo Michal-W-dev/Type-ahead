@@ -14,7 +14,6 @@ function findCities(matchWord, cities) {
     return cities.filter(el => {
         const regex = new RegExp(matchWord, 'gi')
         return el.city.match(regex) || el.state.match(regex)
-        // return el.city.includes(matchWord) || el.state.includes(matchWord)
     })
 }
 
@@ -29,7 +28,6 @@ function displayMatches(delay) {
         clearTimeout(id)
         id = setTimeout(() => {
             const matchArray = findCities(evt.target.value, cities)
-            // console.log(evt.target.value, matchArray);
             suggestions.innerHTML = ''
             if (!matchArray.length) { matchNotFound() }
             else if (evt.target.value.length > 0) { matchFound(matchArray, evt) }
@@ -48,7 +46,6 @@ function matchNotFound() {
 
 // Display when match found
 function matchFound(matchArray, evt) {
-    // matchArray.forEach((el) => {suggestion.innerHTML += `<li><span>${el.city}</span><span class="population">${el.population}</span></li>`});
     html = matchArray.map((el) => {
         const regex = new RegExp(evt.target.value, 'gi')
         const cityName = el.city.replace(regex, `<span class="hl">${evt.target.value}</span>`)
